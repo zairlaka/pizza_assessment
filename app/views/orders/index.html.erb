@@ -1,0 +1,32 @@
+<h2>Orders</h2>
+<hr>
+<% @orders.each do |o| %>
+    <div class='order' style="display: inline-block">
+        ID: <%= o.id %><br>
+        Created: <%= o.created_at.strftime('%B %d, %Y %I:%M:%S') %><br>
+        Promotion Code: <%= o.promotion&.code || "-" %><br>
+        Discount: <%= o.coupon&.code || "-" %><br>
+        Total Price: <%= o.total_price %>
+
+        <%= button_to "Completed", order_path(id: o.id), :method => :patch %>
+    </div>
+    <div class='item_info' style="display: inline-block; padding-left: 30px">
+        Items:
+        <ul>
+            <% o.items.each do |i| %>
+                <li>
+                    <%= i.name %>
+                    <%= link_to "x", remove_an_item_order_path(id: o.id, item_id: i.id), :method => :patch %>
+                </li>
+            <% end %>
+            <% Item.where.not(id: o.items.ids).each do |i| %>
+                <li>
+                    <%= i.name %>
+                    <%= link_to "+", add_an_item_order_path(id: o.id, item_id: i.id), :method => :patch %>
+                </li>
+            <% end %>
+        </ul>
+    </div>
+
+    <hr>
+<% end %>
