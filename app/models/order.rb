@@ -20,7 +20,7 @@ class Order < ApplicationRecord
         discount = coupon&.price.to_f
         promotion = promotion&.price.to_f
 
-        total_discount = discount + promotion
+        self.total_discount = discount + promotion
 
         pizza_multiplier = 50 + (50 * Order.sizes[size]) 
         # price will be multiply according to the size of the pizza with 50 which is our base
@@ -28,8 +28,7 @@ class Order < ApplicationRecord
 
         items_price = items.sum(:price)
         items_multiplier = items_price + (2 * Order.sizes[size]) #for toppings base is set to 2 should be a constant in modal
-
-        total_price = (price + items_multiplier) - total_discount
+        self.total_price = (price + items_multiplier) - total_discount
     end
 
 end

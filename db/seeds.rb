@@ -8,17 +8,17 @@
 
 
 Coupon.create([
-    {code: '2-for-1', price: 50},
-    {code: 'All for U', price: 50},
-    {code: 'Double Trouble', price: 50}
+    {code: '2-for-1', price: 10},
+    {code: 'All for U', price: 10},
+    {code: 'Double Trouble', price: 10}
 ])
 
 puts "---------- Discount Coupons are created --------------" 
 
 Promotion.create([
-    {code: 'Tuesday Special', price: 50},
-    {code: '11-11', price: 50},
-    {code: 'Double Trouble', price: 50}
+    {code: 'Tuesday Special', price: 10},
+    {code: '11-11', price: 10},
+    {code: 'Double Trouble', price: 10}
 ])
 
 puts "---------- Discount Promotions are created --------------" 
@@ -33,8 +33,8 @@ Item.create([
 puts "---------- Items are created --------------" 
 
 Order.create([
-    { total_discount: 50, total_price: 100, status: 0, size: 'small', coupon_id: 1, promotion: 2 },
-    { total_discount: 50, total_price: 300, status: 0, size: 'large', coupon_id: 1, promotion: 2 }
+    { total_discount: 50, total_price: 100, status: 0, size: 'small', coupon_id: 1, promotion: Promotion.find(2) },
+    { total_discount: 50, total_price: 300, status: 0, size: 'large', coupon_id: 1, promotion: Promotion.find(2) }
 ])
 puts "---------- Orders are created --------------"
 

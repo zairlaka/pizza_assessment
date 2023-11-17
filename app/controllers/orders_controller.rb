@@ -15,8 +15,10 @@ class OrdersController < ApplicationController
     end
 
     def remove_an_item
+        @order = Order.find(params[:id])
         @orderItem = OrderItem.find_by(order_id: params[:id], item_id: params[:item_id])
         if @orderItem.destroy
+            @order.save
             msg = "Item was successfully Deleted."
         else
            msg = @orderItem.errors
@@ -25,8 +27,10 @@ class OrdersController < ApplicationController
     end
 
     def add_an_item
+        @order = Order.find(params[:id])
         @orderItem = OrderItem.new(order_id: params[:id], item_id: params[:item_id])
         if @orderItem.save
+            @order.save
             msg = "Item was successfully Added."
         else
            msg = @orderItem.errors
