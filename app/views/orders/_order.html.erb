@@ -1,0 +1,32 @@
+<div id="<%= dom_id order %>">
+  <p>
+    <strong>Total price:</strong>
+    <%= order.total_price %>
+  </p>
+
+  <p>
+    <strong>Total discount:</strong>
+    <%= order.total_discount %>
+  </p>
+
+  <p>
+    <strong>Status:</strong>
+    <%= order.status %>
+  </p>
+
+  <p>
+    <strong>Size:</strong>
+    <%= order.size %>
+  </p>
+
+  <p>
+    <strong>Coupon:</strong>
+    <%= order.coupon&.code %>
+  </p>
+
+  <p>
+    <strong>Promotion:</strong>
+    <%= order.promotion&.code %>
+  </p>
+
+</div>

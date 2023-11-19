@@ -1,14 +1,16 @@
+<p style="color: green"><%= notice %></p>
+
 <h2>Orders</h2>
 <hr>
 <% @orders.each do |o| %>
     <div class='order' style="display: inline-block">
-        ID: <%= o.id %><br>
+        ID: <%= link_to o.id, o %><br>
         Created: <%= o.created_at.strftime('%B %d, %Y %I:%M:%S') %><br>
         Promotion Code: <%= o.promotion&.code || "-" %><br>
         Discount: <%= o.coupon&.code || "-" %><br>
         Total Price: <%= o.total_price %>
 
-        <%= button_to "Completed", order_path(id: o.id), :method => :patch %>
+        <%= button_to "Completed", set_completed_order_path(id: o.id), :method => :patch %>
     </div>
     <div class='item_info' style="display: inline-block; padding-left: 30px">
         Items:
@@ -27,6 +29,10 @@
             <% end %>
         </ul>
     </div>
-
+    
     <hr>
 <% end %>
+<hr>
+<%= link_to "New order", new_order_path %>
+<%= link_to "Manage Items", items_path, class: "float-right" %>
+<hr>

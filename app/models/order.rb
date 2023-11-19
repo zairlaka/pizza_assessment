@@ -1,8 +1,10 @@
 class Order < ApplicationRecord
+    BASE_PRICE = 50
+
     before_validation :calculate_and_set_prices
 
     enum size: %i[small medium large family]
-    enum status: %i[open completed]
+    enum status: %i[open completed], _default: 'open'
 
     scope :missing_items, ->(ids) { Item.where.not(id: ids) }
 
@@ -22,7 +24,7 @@ class Order < ApplicationRecord
 
         self.total_discount = discount + promotion
 
-        pizza_multiplier = 50 + (50 * Order.sizes[size]) 
+        pizza_multiplier = Order::BASE_PRICE + (Order::BASE_PRICE * Order.sizes[size]) 
         # price will be multiply according to the size of the pizza with 50 which is our base
         price = pizza_multiplier
 
